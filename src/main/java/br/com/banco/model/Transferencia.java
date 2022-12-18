@@ -17,7 +17,7 @@ public class Transferencia {
     @Column(name = "data_transferencia", nullable = false)
     private Instant dataTransferencia;
     @Column(name = "valor", nullable = false)
-    private Long valor;
+    private Float valor;
     @Column(name="tipo", nullable = false)
     private String tipo;
     @Column(name = "nome_operador_transacao", nullable = false)
