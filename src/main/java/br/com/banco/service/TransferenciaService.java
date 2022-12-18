@@ -32,4 +32,10 @@ public class TransferenciaService {
         return transferencias;
     }
 
+    @Transactional
+    public List<Transferencia> transferenciasPorOperador(Long id, String nomeOperador){
+        List<Transferencia> transferencias = transferenciaRepository.findByOperador(id, nomeOperador);
+        return transferencias;
+    }
+
 }

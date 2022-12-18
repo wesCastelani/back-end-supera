@@ -3,6 +3,7 @@ package br.com.banco.controller;
 
 import br.com.banco.model.Transferencia;
 import br.com.banco.model.aux.DateForm;
+import br.com.banco.model.auxiliares.OperadorForm;
 import br.com.banco.model.auxiliares.TransferenciasSaldo;
 import br.com.banco.service.TransferenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,13 @@ public class TransferenciaController {
     @GetMapping(value = "/transferencias/{id}/periodo")
     public ResponseEntity<TransferenciasSaldo> listarTransferenciasPorPeriodo(@PathVariable Long id, @RequestBody DateForm dateForm){
         List<Transferencia> transferencias = transferenciaService.transferenciasPorPeriodo(id, dateForm);
+        TransferenciasSaldo transferenciasSaldo = somaSaldo(transferencias);
+        return ResponseEntity.ok().body(transferenciasSaldo);
+    }
+
+    @GetMapping(value = "/transferencias/{id}/operador")
+    public ResponseEntity<TransferenciasSaldo> listarTransferenciasPorPeriodo(@PathVariable Long id, @RequestBody OperadorForm operadorForm){
+        List<Transferencia> transferencias = transferenciaService.transferenciasPorOperador(id, operadorForm.getNomeOperador());
         TransferenciasSaldo transferenciasSaldo = somaSaldo(transferencias);
         return ResponseEntity.ok().body(transferenciasSaldo);
     }
