@@ -1,7 +1,6 @@
 package br.com.banco.service;
 
 import br.com.banco.model.Transferencia;
-import br.com.banco.model.aux.DateForm;
 import br.com.banco.repository.TransferenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,7 @@ public class TransferenciaService {
     }
 
     @Transactional
-    public List<Transferencia> transferenciasPorPeriodo(Long id, DateForm dateForm){
-        LocalDate inicio = dateForm.getInicio();
-        LocalDate fim = dateForm.getFim();
+    public List<Transferencia> transferenciasPorPeriodo(Long id, LocalDate inicio, LocalDate fim){
         List<Transferencia> transferencias = transferenciaRepository.findByPeriodo(id ,inicio, fim);
         return transferencias;
     }
@@ -38,4 +35,8 @@ public class TransferenciaService {
         return transferencias;
     }
 
+    public List<Transferencia> transferenciasPorPeriodoEOperador(Long id, LocalDate inicio, LocalDate fim, String nomeOperador) {
+        List<Transferencia> transferencias = transferenciaRepository.findByPeriodoEOperador(id, inicio, fim, nomeOperador);
+        return transferencias;
+    }
 }

@@ -1,12 +1,13 @@
-package br.com.banco.model.aux;
+package br.com.banco.model.auxiliares;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class DateForm {
+public class FiltroForm {
 
     private LocalDate inicio;
     private LocalDate fim;
+    private String nomeOperador;
 }
