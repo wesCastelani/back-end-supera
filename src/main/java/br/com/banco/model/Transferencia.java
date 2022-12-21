@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ public class Transferencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "data_transferencia", nullable = false)
-    private Instant dataTransferencia;
+    private Date dataTransferencia;
     @Column(name = "valor", nullable = false)
     private Float valor;
     @Column(name="tipo", nullable = false)
@@ -26,4 +27,8 @@ public class Transferencia {
     @ManyToOne
     @JoinColumn(name="conta_id")
     private Conta Conta;
+
+
+
+
 }

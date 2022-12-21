@@ -7,10 +7,7 @@ import br.com.banco.model.auxiliares.TransferenciasSaldo;
 import br.com.banco.service.TransferenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,21 +24,21 @@ public class TransferenciaController {
         return ResponseEntity.ok().body(transferenciasSaldo);
     }
 
-   @GetMapping(value = "/transferencias/{id}/periodo")
+   @PostMapping(value = "/transferencias/{id}/periodo")
     public ResponseEntity<TransferenciasSaldo> listarTransferenciasPorPeriodo(@PathVariable Long id, @RequestBody FiltroForm filtro){
         List<Transferencia> transferencias = transferenciaService.transferenciasPorPeriodo(id, filtro.getInicio(), filtro.getFim());
         TransferenciasSaldo transferenciasSaldo = somaSaldo(transferencias);
         return ResponseEntity.ok().body(transferenciasSaldo);
     }
 
-    @GetMapping(value = "/transferencias/{id}/operador")
+    @PostMapping(value = "/transferencias/{id}/operador")
     public ResponseEntity<TransferenciasSaldo> listarTransferenciasPorOperador(@PathVariable Long id, @RequestBody FiltroForm filtro){
         List<Transferencia> transferencias = transferenciaService.transferenciasPorOperador(id, filtro.getNomeOperador());
         TransferenciasSaldo transferenciasSaldo = somaSaldo(transferencias);
         return ResponseEntity.ok().body(transferenciasSaldo);
     }
 
-    @GetMapping(value = "/transferencias/{id}/periodo/operador")
+    @PostMapping(value = "/transferencias/{id}/periodo/operador")
     public ResponseEntity<TransferenciasSaldo> listarTransferenciasPorPeriodoEOperador(@PathVariable Long id, @RequestBody FiltroForm filtro){
         List<Transferencia> transferencias = transferenciaService.transferenciasPorPeriodoEOperador(id, filtro.getInicio(), filtro.getFim(), filtro.getNomeOperador());
         TransferenciasSaldo transferenciasSaldo = somaSaldo(transferencias);
